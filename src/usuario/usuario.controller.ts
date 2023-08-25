@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { UsuarioService } from "./usuario.service";
 import { Usuario } from "./usuario.entity";
+import { error } from "console";
 
 @Controller('users')
 export class UsuarioController {
@@ -11,6 +12,7 @@ export class UsuarioController {
     
     @Post()
     public cria(@Body() usuario: Usuario) {
+        throw new Error('Erro no cadastro de usuario');
         const usuarioCriado = this.usuarioService.cria(usuario);
 
         return usuarioCriado;
