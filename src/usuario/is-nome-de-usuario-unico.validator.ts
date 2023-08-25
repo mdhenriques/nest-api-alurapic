@@ -1,9 +1,15 @@
 import { ValidationArguments, ValidationOptions, ValidatorConstraint, ValidatorConstraintInterface, registerDecorator } from "class-validator";
+import { UsuarioService } from "./usuario.service";
+import { Injectable } from "@nestjs/common";
 
+@Injectable()
 @ValidatorConstraint()
-class IsNomeDeUsuarioUnicoConstraint implements ValidatorConstraintInterface {
-    validate(value: any, validationArguments?: ValidationArguments): boolean | Promise<boolean> {
-        
+export class IsNomeDeUsuarioUnicoConstraint implements ValidatorConstraintInterface {
+    
+    constructor(private usuarioService: UsuarioService) {}
+
+    validate(nomeDeUsuario: string, validationArguments?: ValidationArguments): boolean | Promise<boolean> {
+        return !!!this.usuarioService.buscaPorNomeDeUsuario(nomeDeUsuario);
     }
 }
 
