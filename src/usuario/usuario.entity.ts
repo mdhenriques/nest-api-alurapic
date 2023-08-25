@@ -1,5 +1,6 @@
 import { IsEmail, IsNotEmpty, IsString } from "class-validator";
 import { IsNomeDeUsuarioUnico } from "./is-nome-de-usuario-unico.validator";
+import { Exclude } from "class-transformer";
 
 export class Usuario {
     id: number;
@@ -20,6 +21,9 @@ export class Usuario {
     })
     email: string;
 
+    @Exclude({
+        toPlainOnly: true
+    })
     @IsNotEmpty({
         message: 'Senha e obrigatoria'
     })
