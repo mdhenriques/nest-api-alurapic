@@ -33,7 +33,10 @@ export class UsuarioController {
     public buscaPorNomeDeUsuario(@Param('nomeDeUsuario') nomeDeUsuario: string) {
         const usuarioEncontrado = this.usuarioService.buscaPorNomeDeUsuario(nomeDeUsuario)
         if (!usuarioEncontrado) {
-            throw new NotFoundException();
+            throw new NotFoundException({
+                statusCode: HttpStatus.NOT_FOUND,
+                message: 'Usuario nao encontrado.'
+            });
         }
 
         return usuarioEncontrado;
